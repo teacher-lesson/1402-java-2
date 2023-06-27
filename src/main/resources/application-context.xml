@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:props.properties"/>
+
+    <bean id="fService" class="org.example.ioc.fortune.HappyFortuneService"/>
+
+<!--    constructor injection-->
+    <bean id="couch" class="org.example.ioc.BaseballCouch">
+        <constructor-arg ref="fService"/>
+    </bean>
+
+<!--    setter injection-->
+    <bean id="couch2" class="org.example.ioc.FootballCouch">
+        <property name="fortuneService" ref="fService"/>
+        <property name="name" value="${football-player.name}"/>
+    </bean>
+
+</beans>
