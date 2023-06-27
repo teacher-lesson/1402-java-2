@@ -1,16 +1,13 @@
 package org.example.ioc;
 
 import org.example.ioc.fortune.FortuneService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component("couch")
 public class BaseballCouch implements Couch {
-
-
+    @Autowired
     private FortuneService fortuneService;
-
-    public BaseballCouch(FortuneService fortuneService) {
-        this.fortuneService = fortuneService;
-    }
-
 
     @Override
     public void getDailyWork() {

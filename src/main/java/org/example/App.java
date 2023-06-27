@@ -13,7 +13,7 @@ public class App {
         ClassPathXmlApplicationContext ctx =
                 new ClassPathXmlApplicationContext("application-context.xml");
 
-        Couch couch = ctx.getBean("couch2", Couch.class);
+        Couch couch = ctx.getBean("couch", Couch.class);
 
         couch.getDailyWork();
 

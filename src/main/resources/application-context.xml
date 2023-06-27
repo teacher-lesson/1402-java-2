@@ -5,19 +5,21 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:property-placeholder location="classpath:props.properties"/>
+    <context:component-scan base-package="org.example"/>
 
-    <bean id="fService" class="org.example.ioc.fortune.HappyFortuneService"/>
+<!--    <bean id="fService" class="org.example.ioc.fortune.HappyFortuneService"/>-->
 
     <!--    constructor injection-->
-    <bean id="couch" class="org.example.ioc.BaseballCouch">
-        <constructor-arg ref="fService"/>
-    </bean>
+<!--    <bean id="couch" class="org.example.ioc.BaseballCouch">-->
+<!--        <constructor-arg ref="happyFortuneService"/>-->
+<!--    </bean>-->
 
     <!--    setter injection-->
     <bean id="couch2" class="org.example.ioc.FootballCouch"
+          scope="prototype"
           init-method="startUp"
           destroy-method="destroy">
-        <property name="fortuneService" ref="fService"/>
+        <property name="fortuneService" ref="happyFortuneService"/>
         <property name="name" value="${football-player.name}"/>
     </bean>
 
