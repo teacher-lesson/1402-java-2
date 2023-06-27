@@ -20,5 +20,7 @@ public class App {
         couch.callFortuneService();
 
         System.out.println(couch);
+
+        ctx.close();
     }
 }

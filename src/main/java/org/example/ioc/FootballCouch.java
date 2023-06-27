@@ -32,4 +32,17 @@ public class FootballCouch implements Couch {
                 ", fortuneService=" + fortuneService +
                 '}';
     }
+
+
+    public void startUp() {
+        System.out.println("This method call when bean inited!");
+    }
+
+
+
+    public void destroy() {
+        System.out.println("bean Destrotyed!");
+    }
+
+
 }
