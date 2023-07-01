@@ -34,12 +34,13 @@ public class FootballCouch implements Couch {
     }
 
 
+    //    @PostConstruct
     public void startUp() {
         System.out.println("This method call when bean inited!");
     }
 
 
-
+    //    @PreDestroy
     public void destroy() {
         System.out.println("bean Destrotyed!");
     }

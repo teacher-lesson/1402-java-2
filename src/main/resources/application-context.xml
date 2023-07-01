@@ -15,10 +15,10 @@
 <!--    </bean>-->
 
     <!--    setter injection-->
-    <bean id="couch2" class="org.example.ioc.FootballCouch"
-          scope="prototype"
-          init-method="startUp"
-          destroy-method="destroy">
+    <bean id="couch2" class="org.example.ioc.FootballCouch">
+<!--          scope="prototype"-->
+<!--          init-method="startUp"-->
+<!--          destroy-method="destroy"-->
         <property name="fortuneService" ref="happyFortuneService"/>
         <property name="name" value="${football-player.name}"/>
     </bean>
