@@ -1,12 +1,16 @@
-package com.example.api;
+package com.example.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class UserController {
+
+
+
 
     @RequestMapping("/register")
     public String registerForm() {
@@ -19,6 +23,10 @@ public class UserController {
         final String username = request.getParameter("username");
         final String password = request.getParameter("password");
         final String repeatPassword = request.getParameter("repeatPassword");
+
+        final HttpSession session = request.getSession();
+
+
 
         System.out.println(username);
         System.out.println(password);
