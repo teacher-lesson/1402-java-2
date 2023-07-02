@@ -5,6 +5,7 @@ import com.example.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +25,8 @@ public class PersonController {
 
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String showPersonAddForm() {
+    public String showPersonAddForm(Model model) {
+        model.addAttribute("person", new Person());
         return "person/add-person";
     }
 
@@ -41,17 +43,27 @@ public class PersonController {
 //        return "person/list-person";
 //    }
 
+//    @RequestMapping(value = "/add", method = RequestMethod.POST)
+//    public String addPerson(
+//            @RequestParam
+//            String firstName,
+//            @RequestParam
+//            String lastName,
+//            @RequestParam
+//            int age
+//    ) {
+//        personService.addPerson(new Person(firstName, lastName, age));
+//
+//        return "person/added";
+//    }
+
+
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addPerson(
-            @RequestParam
-            String firstName,
-            @RequestParam
-            String lastName,
-            @RequestParam
-            int age
+            @ModelAttribute("person")
+            Person person
     ) {
-        personService.addPerson(new Person(firstName, lastName, age));
-
+        personService.addPerson(person);
         return "person/added";
     }
 }
