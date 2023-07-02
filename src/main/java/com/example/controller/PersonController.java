@@ -30,34 +30,6 @@ public class PersonController {
         return "person/add-person";
     }
 
-
-//    @RequestMapping(value = "/add", method = RequestMethod.POST)
-//    public String addPerson(HttpServletRequest request) {
-//        String firstName = request.getParameter("firstName");
-//        String lastName = request.getParameter("lastName");
-//        String age = request.getParameter("age");
-//
-//        System.out.println(firstName);
-//        System.out.println(lastName);
-//        System.out.println(age);
-//        return "person/list-person";
-//    }
-
-//    @RequestMapping(value = "/add", method = RequestMethod.POST)
-//    public String addPerson(
-//            @RequestParam
-//            String firstName,
-//            @RequestParam
-//            String lastName,
-//            @RequestParam
-//            int age
-//    ) {
-//        personService.addPerson(new Person(firstName, lastName, age));
-//
-//        return "person/added";
-//    }
-
-
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addPerson(
             @ModelAttribute("person")
