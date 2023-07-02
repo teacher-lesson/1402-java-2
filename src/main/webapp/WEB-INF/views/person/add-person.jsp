@@ -32,16 +32,19 @@
     <div class="form-outline mb-4">
         <form:input type="text" id="firstName" name="firstName" class="form-control" path="firstName"/>
         <label class="form-label" for="firstName">First name : </label>
+        <form:errors cssClass="text-danger" path="firstName"/>
     </div>
 
     <div class="form-outline mb-4">
         <form:input path="lastName" type="text" id="lastName" name="lastName" class="form-control"/>
         <label class="form-label" for="lastName">Last Name :</label>
+        <form:errors cssClass="text-danger" path="lastName"/>
     </div>
 
     <div class="form-outline mb-4">
         <form:input path="age" type="number" id="age" name="age" class="form-control"/>
         <label class="form-label" for="age">Age</label>
+        <form:errors cssClass="text-danger" path="age"/>
     </div>
 
     <!-- Submit button -->

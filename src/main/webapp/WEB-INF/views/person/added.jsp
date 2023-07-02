@@ -12,7 +12,7 @@
 </head>
 <body>
 
-Your person add successfully
+Your person add ${person.firstName} : ${person.lastName} successfully
 
 </body>
 </html>
