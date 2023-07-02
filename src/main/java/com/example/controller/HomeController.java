@@ -16,7 +16,7 @@ public class HomeController {
         final String username = (String) session.getAttribute("username");
 
         if (username != null) { // mean user has login
-            model.addAttribute("username", username)
+            model.addAttribute("username", username);
             return "home/logined-home";
         } else {
             return "home/guess-home";
