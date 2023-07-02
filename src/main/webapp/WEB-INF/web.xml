@@ -5,4 +5,14 @@
          version="6.0">
     <display-name>Archetype Created Web Application</display-name>
     
+    <servlet>
+        <servlet-name>testServlet</servlet-name>
+        <servlet-class>com.example.TestServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>testServlet</servlet-name>
+        <url-pattern>/main</url-pattern>
+    </servlet-mapping>
+    
 </web-app>
