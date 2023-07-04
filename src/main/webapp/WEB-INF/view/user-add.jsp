@@ -14,7 +14,7 @@
 <body>
 
 <%--@elvariable id="user" type="com.example.model.User"--%>
-<form:form method="post" action="/app/user" modelAttribute="user">
+<form:form method="post" servletRelativeAction="/app/user" modelAttribute="user">
     <form:input path="firstName"/>
     <br/>
     <form:input path="lastName"/>

@@ -2,7 +2,7 @@ package com.example.dao;
 
 import java.util.stream.Stream;
 
-public interface Dao<E, ID> {
+public interface IDao<E, ID> {
 
     void insert(E e);
 
