@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  mysql:
+    image: 'mysql:latest'
+    environment:
+      - 'MYSQL_DATABASE=springjdbc'
+      - 'MYSQL_PASSWORD=spring'
+      - 'MYSQL_ROOT_PASSWORD=root'
+      - 'MYSQL_USER=spring'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      #      - ./db/init.sql:/docker-entrypoint-initdb.d/0_init.sql
+      - todo_db:/var/lib/mysql
+volumes:
+  todo_db: { }
