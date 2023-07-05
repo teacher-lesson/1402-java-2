@@ -1,11 +1,6 @@
 package org.example;
 
-import org.example.config.SpringConfig;
-import org.example.ioc.BaseballCouch;
-import org.example.ioc.BasketBallCouch;
-import org.example.ioc.Couch;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.example.player.Player;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -13,18 +8,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class App {
     public static void main(String[] args) {
-//        ApplicationContext ctx =
-//                new ClassPathXmlApplicationContext("application-context.xml");
 
-        ApplicationContext ctx =
-                new AnnotationConfigApplicationContext(SpringConfig.class);
+        var context =
+                new ClassPathXmlApplicationContext("application-context.xml");
 
-        Couch couch = ctx.getBean("couch", Couch.class);
+        Player player = context.getBean("player", Player.class);
 
-        couch.getDailyWork();
-
-        couch.callFortuneService();
-
-        System.out.println(couch);
+        System.out.println(player);
     }
 }

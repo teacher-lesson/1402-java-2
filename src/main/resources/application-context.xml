@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <context:property-placeholder location="classpath:props.properties"/>
-    <context:component-scan base-package="org.example"/>
+    <bean class="org.example.couch.FootballCouch" id="footballCouch">
+        <constructor-arg value="Mohammad"/>
+    </bean>
 
-<!--    <bean id="fService" class="org.example.ioc.fortune.HappyFortuneService"/>-->
+    <bean class="org.example.couch.BasketballCouch" id="basketballCouch">
+        <constructor-arg value="Hamed"/>
+    </bean>
 
-    <!--    constructor injection-->
-<!--    <bean id="couch" class="org.example.ioc.BaseballCouch">-->
-<!--        <constructor-arg ref="happyFortuneService"/>-->
-<!--    </bean>-->
+    <bean class="org.example.player.FootballPlayer" id="player">
+        <constructor-arg index="0" value="Ali"/>
+        <constructor-arg index="1" value="25"/>
 
-    <!--    setter injection-->
-    <bean id="couch2" class="org.example.ioc.FootballCouch">
-<!--          scope="prototype"-->
-<!--          init-method="startUp"-->
-<!--          destroy-method="destroy"-->
-        <property name="fortuneService" ref="happyFortuneService"/>
-        <property name="name" value="${football-player.name}"/>
+        <property name="customCouch" ref="footballCouch"/>
+<!--         setCustomCouch-->
     </bean>
 
 </beans>
