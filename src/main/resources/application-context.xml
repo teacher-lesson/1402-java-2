@@ -4,22 +4,9 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:property-placeholder location="classpath:name.properties"/>
+    <context:component-scan base-package="org.example"/>
 
-    <bean class="org.example.couch.FootballCouch" id="footballCouch">
-        <constructor-arg value="${couch.football.name}"/>
-    </bean>
-
-    <bean class="org.example.couch.BasketballCouch" id="basketballCouch">
-        <constructor-arg value="Hamed"/>
-    </bean>
-
-    <bean class="org.example.player.FootballPlayer" id="player">
-        <constructor-arg index="0" value="${footballplayer.name}"/>
-        <constructor-arg index="1" value="${footballplayer.age}"/>
-
-        <property name="customCouch" ref="footballCouch"/>
-<!--         setCustomCouch-->
-    </bean>
-
+<!--    <bean class="org.example.player.BasketballPlayer" id="basketballPlayer2" scope="prototype">-->
+<!--        <constructor-arg index="0" ref="basketballCouch"/>-->
+<!--    </bean>-->
 </beans>

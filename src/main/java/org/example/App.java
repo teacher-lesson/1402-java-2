@@ -12,7 +12,7 @@ public class App {
         var context =
                 new ClassPathXmlApplicationContext("application-context.xml");
 
-        Player player = context.getBean("player", Player.class);
+        Player player = context.getBean(Player.class);
 
         System.out.println(player);
     }
