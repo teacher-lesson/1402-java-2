@@ -21,5 +21,21 @@
         <servlet-name>dispatcherServlet</servlet-name>
         <url-pattern>/app/*</url-pattern>
     </servlet-mapping>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/404.jsp</location>
+    </error-page>
+
+
+<!--    <filter>-->
+<!--        <filter-class>com.example.filter.TestFilter</filter-class>-->
+<!--        <filter-name>ssss</filter-name>-->
+<!--    </filter>-->
+
+<!--    <filter-mapping>-->
+<!--        <filter-name>ssss</filter-name>-->
+<!--        <url-pattern>/app/*</url-pattern>-->
+<!--    </filter-mapping>-->
     
 </web-app>

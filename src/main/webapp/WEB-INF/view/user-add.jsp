@@ -13,6 +13,7 @@
 </head>
 <body>
 
+
 <%--@elvariable id="user" type="com.example.model.User"--%>
 <form:form method="post" servletRelativeAction="/app/user" modelAttribute="user">
     <form:input path="firstName"/>
