@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.player.Player;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -9,8 +10,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class App {
     public static void main(String[] args) {
 
+        //spring container (Application context) in XML way
+//        var context =
+//                new ClassPathXmlApplicationContext("application-context.xml");
+
+        //spring container (Application context) in Annotaion way
         var context =
-                new ClassPathXmlApplicationContext("application-context.xml");
+                new AnnotationConfigApplicationContext(Config.class);
 
         Player player = context.getBean(Player.class);
 

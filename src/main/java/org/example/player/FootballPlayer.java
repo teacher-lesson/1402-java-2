@@ -13,7 +13,7 @@ import java.util.Date;
 
 
 @Data
-public class FootballPlayer implements Player {
+public class FootballPlayer implements Player, InitializingBean {
     private String name;
     private Date birthDay;
 
@@ -30,15 +30,15 @@ public class FootballPlayer implements Player {
         return this;
     }
 
-    @PostConstruct
-    public void calculateAge() {
-
-        var now = Calendar.getInstance();
-        var date = Calendar.getInstance();
-        date.setTimeInMillis(birthDay.getTime());
-
-        age = now.get(Calendar.YEAR) - date.get(Calendar.YEAR);
-    }
+//    @PostConstruct
+//    public void calculateAge() {
+//
+//        var now = Calendar.getInstance();
+//        var date = Calendar.getInstance();
+//        date.setTimeInMillis(birthDay.getTime());
+//
+//        age = now.get(Calendar.YEAR) - date.get(Calendar.YEAR);
+//    }
 
 
     @Override
@@ -51,7 +51,4 @@ public class FootballPlayer implements Player {
         age = now.get(Calendar.YEAR) - date.get(Calendar.YEAR);
     }
 
-    @Override
-    public void destroy() throws Exception {
-    }
 }
