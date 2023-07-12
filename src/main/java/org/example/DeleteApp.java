@@ -20,10 +20,14 @@ public class DeleteApp {
         /** Transaction started */
 
         final Student student = session.get(Student.class, 3);
+        student.setDetail(null);
+
         session.remove(student);
 
         transaction.commit();
         /** Transaction stoped */
+
+        student.setEmail("new mail");
 
 
     }

@@ -25,6 +25,10 @@ public class Student {
     @Column
     private String email;
 
+    @OneToOne
+    @JoinColumn(name = "detail_id")
+    private StudentDetail detail;
+
     public Student(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
