@@ -1,6 +1,6 @@
-package org.example.dao.person.impl;
+package org.example.dao.person;
 
-import org.example.dao.person.BaseDao;
+import org.example.dao.BaseDao;
 import org.example.domain.person.Person;
 
 public interface PersonDao extends BaseDao<Person, Integer> {

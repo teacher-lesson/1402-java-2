@@ -12,13 +12,11 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MariaDBDialect</property>
         <property name="hibernate.current_session_context_class">thread</property>
-<!--        <property name="casca"></property>-->
+        <!--        <property name="casca"></property>-->
         <!-- DB schema will be updated if needed -->
-        <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
-        <mapping class="org.example.domain.Student"/>
-        <mapping class="org.example.domain.StudentDetail"/>
-        <mapping class="org.example.domain.Teacher"/>
-        <mapping class="org.example.domain.Course"/>
+        <mapping class="org.example.domain.person.Person"/>
+        <mapping class="org.example.domain.car.Car"/>
     </session-factory>
 </hibernate-configuration>
