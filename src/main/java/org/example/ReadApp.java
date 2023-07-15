@@ -26,11 +26,11 @@ public class ReadApp {
 
         System.out.println(teacher);
 
+        transaction.commit();
+
         System.out.println("After teacher call");
 
         System.out.println(teacher.getCourses());
-
-        transaction.commit();
 
 
     }
