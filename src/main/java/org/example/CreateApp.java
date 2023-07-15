@@ -1,10 +1,14 @@
 package org.example;
 
+import org.example.domain.Course;
 import org.example.domain.Student;
 import org.example.domain.StudentDetail;
+import org.example.domain.Teacher;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+
+import java.util.List;
 
 /**
  * Hello world!
@@ -20,15 +24,15 @@ public class CreateApp {
         final Transaction transaction = session.beginTransaction();
         // start tx
 
-        final Student student = new Student("Reza3", "Reza", "ali@protonmail.com");
-        final StudentDetail detail = new StudentDetail("091222222", "Mohammad3");
+        final Teacher teacher = new Teacher("Ali", "Hassani", "ex@gmail.com");
 
-        student.setDetail(detail);
+        final Course java = new Course("Java", teacher);
+        final Course php = new Course("Php", teacher);
+        final Course math = new Course("Math", teacher);
 
-        session.persist(detail);
-        session.persist(student);
+        teacher.setCourses(List.of(java, php, math));
 
-
+        session.persist(teacher);
 
         // stop tx
         transaction.commit();

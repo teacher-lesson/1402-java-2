@@ -2,10 +2,15 @@ package org.example.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import java.util.Objects;
 
 @Data
 @NoArgsConstructor
+//@ToString(exclude = "student")
 
 
 @Entity
@@ -21,6 +26,10 @@ public class StudentDetail {
 
     @Column(name = "parent_name")
     private String parentName;
+
+    @ToString.Exclude
+    @OneToOne(mappedBy = "detail")
+    private Student student;
 
     public StudentDetail(String phoneNumber, String parentName) {
         this.phoneNumber = phoneNumber;

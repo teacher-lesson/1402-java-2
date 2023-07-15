@@ -2,16 +2,18 @@ package org.example.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
+import java.util.Map;
 
 @Data
 @NoArgsConstructor
 
 
 @Entity
-@Table(name = "students")
-public class Student {
+@Table(name = "teachers")
+public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -26,12 +28,10 @@ public class Student {
     @Column
     private String email;
 
-    @EqualsAndHashCode.Exclude
-    @OneToOne
-    @JoinColumn(name = "detail_id")
-    private StudentDetail detail;
+    @OneToMany(mappedBy = "teacher", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.PERSIST})
+    private List<Course> courses;
 
-    public Student(String firstName, String lastName, String email) {
+    public Teacher(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

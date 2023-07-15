@@ -18,5 +18,7 @@
 
         <mapping class="org.example.domain.Student"/>
         <mapping class="org.example.domain.StudentDetail"/>
+        <mapping class="org.example.domain.Teacher"/>
+        <mapping class="org.example.domain.Course"/>
     </session-factory>
 </hibernate-configuration>

@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.domain.Student;
+import org.example.domain.StudentDetail;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
@@ -20,13 +21,11 @@ public class ReadApp {
 
         final Transaction transaction = session.beginTransaction();
 
-        final List<Student> fromStudent = (List<Student>) session.createQuery(
-                "from Student a where a.email like '%@protonmail.com'"
-                )
-                .getResultList();
+        final StudentDetail detail = session.get(StudentDetail.class, 1);
 
-        System.out.println(fromStudent);
+        final Student student = detail.getStudent();
 
+        System.out.println(student);
 
         transaction.commit();
 
