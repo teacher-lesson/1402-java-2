@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.domain.Student;
 import org.example.domain.StudentDetail;
+import org.example.domain.Teacher;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
@@ -21,11 +22,13 @@ public class ReadApp {
 
         final Transaction transaction = session.beginTransaction();
 
-        final StudentDetail detail = session.get(StudentDetail.class, 1);
+        final Teacher teacher = session.get(Teacher.class, 2);
 
-        final Student student = detail.getStudent();
+        System.out.println(teacher);
 
-        System.out.println(student);
+        System.out.println("After teacher call");
+
+        System.out.println(teacher.getCourses());
 
         transaction.commit();
 

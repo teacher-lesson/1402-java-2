@@ -23,14 +23,15 @@ public class CreateApp {
 
         final Transaction transaction = session.beginTransaction();
         // start tx
+//        final Course java = session.get(Course.class, 1);
 
-        final Teacher teacher = new Teacher("Ali", "Hassani", "ex@gmail.com");
+        final Teacher teacher = new Teacher("Hassan2", "Alavi2", "ex2@gmail.com");
 
-        final Course java = new Course("Java", teacher);
-        final Course php = new Course("Php", teacher);
-        final Course math = new Course("Math", teacher);
+        teacher.addCourse(new Course("Java"));
+        teacher.addCourse(new Course("Physics"));
+        teacher.addCourse(new Course("English"));
 
-        teacher.setCourses(List.of(java, php, math));
+//        teacher.getCourses().add(java);
 
         session.persist(teacher);
 

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
@@ -19,12 +20,13 @@ public class Course {
     @Column
     private String name;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    public Course(String name, Teacher teacher) {
+    public Course(String name) {
         this.name = name;
-        this.teacher = teacher;
     }
 }
