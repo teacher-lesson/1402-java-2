@@ -1,28 +1,19 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
-    <artifactId>spring-hibernate-lesson</artifactId>
+    <groupId>com.example</groupId>
+    <artifactId>spring-mvc-hibernate</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <name>spring-mvc-hibernate</name>
     <packaging>war</packaging>
 
-    <name>spring-hibernate-lesson</name>
-    <url>http://maven.apache.org</url>
-
     <properties>
-        <!--Project config-->
-        <repackage.classifier/>
-        <kotlin.compiler.jvmTarget>17</kotlin.compiler.jvmTarget>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.test.skip>true</maven.test.skip>
-
-        <!--JVM version-->
-        <java.version>17</java.version>
-        <kotlin.version>1.8.21</kotlin.version>
-
-        <!--Dependency version-->
-        <lombok.version>1.18.28</lombok.version>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
     </properties>
 
     <dependencies>
@@ -36,151 +27,43 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>6.0.10</version>
+            <version>6.0.11</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.2.6.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>6.0.11</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>3.1.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.28</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>
 
-
-
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.jetbrains.kotlin</groupId>
-                    <artifactId>kotlin-maven-plugin</artifactId>
-                    <version>${kotlin.version}</version>
-                    <executions>
-                        <execution>
-                            <id>kapt</id>
-                            <goals>
-                                <goal>kapt</goal>
-                            </goals>
-                            <configuration>
-                                <sourceDirs>
-                                    <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
-                                    <sourceDir>${project.basedir}/src/main/java</sourceDir>
-                                </sourceDirs>
-                                <annotationProcessorPaths>
-                                    <path>
-                                        <groupId>org.projectlombok</groupId>
-                                        <artifactId>lombok</artifactId>
-                                        <version>${lombok.version}</version>
-                                    </path>
-                                </annotationProcessorPaths>
-                            </configuration>
-                        </execution>
-                        <execution>
-                            <id>compile</id>
-                            <phase>process-sources</phase>
-                            <goals>
-                                <goal>compile</goal>
-                            </goals>
-                            <configuration>
-                                <sourceDirs>
-                                    <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
-                                    <sourceDir>${project.basedir}/src/main/java</sourceDir>
-                                </sourceDirs>
-                            </configuration>
-                        </execution>
-                        <execution>
-                            <id>test-compile</id>
-                            <phase>process-test-sources</phase>
-                            <goals>
-                                <goal>test-compile</goal>
-                            </goals>
-                            <configuration>
-                                <sourceDirs>
-                                    <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
-                                    <sourceDir>${project.basedir}/src/test/java</sourceDir>
-                                </sourceDirs>
-                            </configuration>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <compilerPlugins>
-                            <plugin>all-open</plugin>
-                            <plugin>no-arg</plugin>
-                            <plugin>lombok</plugin>
-                            <plugin>spring</plugin>
-                            <plugin>jpa</plugin>
-                        </compilerPlugins>
-                        <pluginOptions>
-                            <option>no-arg:invokeInitializers=true</option>
-                            <option>lombok:config=${project.basedir}/lombok.config</option>
-                        </pluginOptions>
-                        <jvmTarget>${java.version}</jvmTarget>
-                        <javaParameters>true</javaParameters>
-                        <args>
-                            <arg>-Xjsr305=strict</arg>
-                            <arg>-Xjvm-default=all</arg>
-                        </args>
-                    </configuration>
-                    <dependencies>
-<!--                        <dependency>-->
-<!--                            <groupId>org.jetbrains.kotlin</groupId>-->
-<!--                            <artifactId>kotlin-maven-allopen</artifactId>-->
-<!--                            <version>${kotlin.version}</version>-->
-<!--                        </dependency>-->
-<!--                        <dependency>-->
-<!--                            <groupId>org.jetbrains.kotlin</groupId>-->
-<!--                            <artifactId>kotlin-maven-noarg</artifactId>-->
-<!--                            <version>${kotlin.version}</version>-->
-<!--                        </dependency>-->
-                        <dependency>
-                            <groupId>org.jetbrains.kotlin</groupId>
-                            <artifactId>kotlin-maven-lombok</artifactId>
-                            <version>${kotlin.version}</version>
-                        </dependency>
-<!--                        <dependency>-->
-<!--                            <groupId>org.springframework.boot</groupId>-->
-<!--                            <artifactId>spring-boot-configuration-processor</artifactId>-->
-<!--                            <version>${spring-boot.version}</version>-->
-<!--                        </dependency>-->
-                        <dependency>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-<!--                        <release>${java.version}</release>-->
-                        <source>${java.version}</source>
-                        <target>${java.version}</target>
-                        <compilerVersion>${java.version}</compilerVersion>
-                    </configuration>
-                    <executions>
-                        <!-- Replacing default-compile as it is treated specially by maven -->
-                        <execution>
-                            <id>default-compile</id>
-                            <phase>none</phase>
-                        </execution>
-                        <!-- Replacing default-testCompile as it is treated specially by maven -->
-                        <execution>
-                            <id>default-testCompile</id>
-                            <phase>none</phase>
-                        </execution>
-                        <execution>
-                            <id>java-compile</id>
-                            <phase>compile</phase>
-                            <goals>
-                                <goal>compile</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>java-test-compile</id>
-                            <phase>test-compile</phase>
-                            <goals>
-                                <goal>testCompile</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+            </plugin>
+        </plugins>
     </build>
 </project>
