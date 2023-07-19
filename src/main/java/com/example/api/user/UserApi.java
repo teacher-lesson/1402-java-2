@@ -12,7 +12,7 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserApi {
     private final UserService userService;
 
@@ -40,7 +40,7 @@ public class UserApi {
 //        return ResponseEntity.status(201).build();
     }
 
-    @GetMapping(value = "/list", produces = APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/", produces = APPLICATION_JSON_VALUE)
     public List<UserDto> readAll() {
         final List<UserDto> userDtos = userService.readAll();
 
