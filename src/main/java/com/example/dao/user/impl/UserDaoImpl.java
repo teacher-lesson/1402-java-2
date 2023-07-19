@@ -3,7 +3,6 @@ package com.example.dao.user.impl;
 import com.example.dao.BaseDao;
 import com.example.dao.user.UserDao;
 import com.example.domain.user.User;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -35,6 +34,14 @@ public class UserDaoImpl extends BaseDao<User, Integer> implements UserDao {
     @Transactional(readOnly = true)
     public List<User> selectAllWithProp() {
         var session = sessionFactory.getCurrentSession();
-        return session.createQuery("from User u left join fetch u.books").getResultList();
+        return session.createQuery("from User u left join fetch u.books left join fetch u.roles").getResultList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public User selectWithProp(Integer id) {
+        var session = sessionFactory.getCurrentSession();
+        return (User) session.createQuery("from User u left join fetch u.books left join fetch u.roles where u.id = :id")
+                .setParameter("id", id).getSingleResult();
     }
 }

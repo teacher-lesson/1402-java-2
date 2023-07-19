@@ -10,9 +10,6 @@ import com.example.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 public class UserServiceImpl extends BaseService<UserDto, User, Integer> implements UserService {
 
@@ -37,6 +34,6 @@ public class UserServiceImpl extends BaseService<UserDto, User, Integer> impleme
 
     @Override
     public UserFullDto readFullById(Integer id) {
-        return getMapper().toFullDto(getDao().select(id));
+        return getMapper().toFullDto(getDao().selectWithProp(id));
     }
 }
