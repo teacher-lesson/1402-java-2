@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.HashSet;
 
 @Data
-public class UserLightDto implements IDto<Integer> {
+public class UserFullDto implements IDto<Integer> {
     private Integer id;
     private String username;
     private String password;
@@ -15,7 +15,7 @@ public class UserLightDto implements IDto<Integer> {
     private String lastName;
     private int age;
 
-    public UserLightDto(User user) {
+    public UserFullDto(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
         this.password = user.getPassword();

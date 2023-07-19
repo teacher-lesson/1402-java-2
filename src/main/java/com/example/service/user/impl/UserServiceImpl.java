@@ -3,7 +3,7 @@ package com.example.service.user.impl;
 import com.example.dao.user.UserDao;
 import com.example.domain.user.User;
 import com.example.dto.user.UserDto;
-import com.example.dto.user.UserLightDto;
+import com.example.dto.user.UserFullDto;
 import com.example.service.BaseService;
 import com.example.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +29,9 @@ public class UserServiceImpl extends BaseService<UserDto, User, Integer> impleme
 
     @Override
     protected UserDto createDto(User user) {
+        if (user == null) {
+            return null;
+        }
         return new UserDto(user);
     }
 
@@ -38,7 +41,7 @@ public class UserServiceImpl extends BaseService<UserDto, User, Integer> impleme
     }
 
     @Override
-    public List<UserLightDto> readAllWithoutBook() {
-        return getDao().selectAll().stream().map(UserLightDto::new).collect(Collectors.toList());
+    public List<UserFullDto> readAllWithoutBook() {
+        return getDao().selectAll().stream().map(UserFullDto::new).collect(Collectors.toList());
     }
 }
