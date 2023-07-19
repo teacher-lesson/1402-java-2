@@ -1,19 +1,22 @@
 package com.example;
 
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.ServletException;
-import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.support.XmlWebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
+import com.example.core.SpringConfig;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class MyWebInit implements WebApplicationInitializer {
+public class MyWebInit extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        var context = new XmlWebApplicationContext();
-        context.setConfigLocation("/WEB-INF/application-context.xml");
+    protected Class<?>[] getRootConfigClasses() {
+        return null;
+    }
 
-        var distpacher = servletContext.addServlet("distpacher", new DispatcherServlet(context));
-        distpacher.addMapping("/app/*");
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class[]{SpringConfig.class};
+    }
+
+    @Override
+    protected String[] getServletMappings() {
+        return new String[]{"/app/*"};
     }
 }
