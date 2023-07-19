@@ -47,8 +47,8 @@ public class UserApi {
         return userDtos;
     }
 
-    @GetMapping(value = "/", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity readById(@RequestParam Integer id) {
+    @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity readByIdByPath(@PathVariable Integer id) {
         final UserDto read = userService.read(id);
 
         if (read == null) {
@@ -56,11 +56,6 @@ public class UserApi {
         }
 
         return ResponseEntity.ok(read);
-    }
-
-    @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity readByIdByPath(@PathVariable Integer id) {
-        return readById(id);
     }
 
     @PutMapping("/")
