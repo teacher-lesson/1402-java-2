@@ -7,7 +7,5 @@ import com.example.service.IService;
 import java.util.List;
 
 public interface UserService extends IService<UserDto, Integer> {
-    List<UserDto> readAllWithProp();
-
-    List<UserFullDto> readAllWithoutBook();
+    UserFullDto readFullById(Integer id);
 }

@@ -5,6 +5,7 @@ import com.example.domain.user.User;
 import com.example.dto.user.UserDto;
 import com.example.dto.user.UserFullDto;
 import com.example.service.BaseService;
+import com.example.service.user.UserMapper;
 import com.example.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +17,12 @@ import java.util.stream.Collectors;
 public class UserServiceImpl extends BaseService<UserDto, User, Integer> implements UserService {
 
     private final UserDao userDao;
+    private final UserMapper userMapper;
 
     @Autowired
-    public UserServiceImpl(UserDao userDao) {
+    public UserServiceImpl(UserDao userDao, UserMapper userMapper) {
         this.userDao = userDao;
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -28,20 +31,12 @@ public class UserServiceImpl extends BaseService<UserDto, User, Integer> impleme
     }
 
     @Override
-    protected UserDto createDto(User user) {
-        if (user == null) {
-            return null;
-        }
-        return new UserDto(user);
+    protected UserMapper getMapper() {
+        return userMapper;
     }
 
     @Override
-    public List<UserDto> readAllWithProp() {
-        return userDao.selectAllWithProp().stream().map(UserDto::new).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<UserFullDto> readAllWithoutBook() {
-        return getDao().selectAll().stream().map(UserFullDto::new).collect(Collectors.toList());
+    public UserFullDto readFullById(Integer id) {
+        return getMapper().toFullDto(getDao().select(id));
     }
 }

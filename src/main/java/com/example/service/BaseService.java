@@ -14,7 +14,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public abstract class BaseService<D extends IDomainDto<ID>, E extends IEntity<ID>, ID extends Number> implements IService<D, ID> {
     protected abstract IDao<E, ID> getDao();
 
-    protected abstract IDomainDto<ID> createDto(E e);
+    protected abstract IMapper<E, D, ID> getMapper();
 
     public boolean isExist(ID id) {
         return getDao().isExist(id);
@@ -22,7 +22,7 @@ public abstract class BaseService<D extends IDomainDto<ID>, E extends IEntity<ID
 
     @Override
     public void create(D d) {
-        getDao().insert((E) d.toEntity());
+        getDao().insert(getMapper().toEntity(d));
     }
 
     @Override
@@ -36,26 +36,26 @@ public abstract class BaseService<D extends IDomainDto<ID>, E extends IEntity<ID
 //            throw new ResponseException(NOT_FOUND);
         }
 
-        return (D) createDto(getDao().select(id));
+        return getMapper().toDto(getDao().select(id));
     }
 
     @Override
     public List<D> readAll() {
-        return (List<D>) getDao().selectAll().stream()
-                .map(x -> createDto(x)).collect(Collectors.toList());
+        return getDao().selectAll().stream()
+                .map(x -> getMapper().toDto(x)).collect(Collectors.toList());
     }
 
     @Override
-    public D update(D e) {
-        if (e == null || e.getId() == null) {
+    public D update(D d) {
+        if (d == null || d.getId() == null) {
             throw new ResponseException(400);
         }
 
-        if (!isExist(e.getId())) {
+        if (!isExist(d.getId())) {
             throw new ResponseException(404);
         }
 
-        return (D) createDto(getDao().modify((E) e.toEntity()));
+        return getMapper().toDto(getDao().modify(getMapper().toEntity(d)));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.api.user;
 
 import com.example.dto.user.UserDto;
+import com.example.dto.user.UserFullDto;
 import com.example.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,7 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserApi {
     private final UserService userService;
 
@@ -20,17 +21,6 @@ public class UserApi {
     public UserApi(UserService userService) {
         this.userService = userService;
     }
-
-//    @GetMapping(value = "/test")
-//    public String test() {
-//        userService.create(new UserDto(new User("admin1", "pass1", "Ali1", "Alavi1", 21)));
-//        userService.create(new UserDto(new User("admin2", "pass2", "Ali2", "Alavi2", 22)));
-//        userService.create(new UserDto(new User("admin3", "pass3", "Ali3", "Alavi3", 23)));
-//        userService.create(new UserDto(new User("admin4", "pass4", "Ali4", "Alavi4", 24)));
-//        userService.create(new UserDto(new User("admin5", "pass5", "Ali5", "Alavi5", 25)));
-//
-//        return "OK";
-//    }
 
     @PostMapping(value = "/", consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity save(@RequestBody UserDto dto) {
@@ -53,9 +43,14 @@ public class UserApi {
         return ResponseEntity.ok(read);
     }
 
+    @GetMapping(value = "/full/{id}", produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity readFullByIdByPath(@PathVariable Integer id) {
+        final UserFullDto fullDto = userService.readFullById(id);
+        return ResponseEntity.ok(fullDto);
+    }
+
     @PutMapping("/")
     public ResponseEntity update(@RequestBody UserDto dto) {
-        final UserDto read = userService.read(dto.getId());
         userService.update(dto);
 
         return ResponseEntity.accepted().build();

@@ -15,13 +15,12 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 public class SpringMvcConfig {
 
-
     @Bean
     public ViewResolver viewResolver() {
         var viewResolver = new InternalResourceViewResolver();
 
-        viewResolver.setSuffix("");
-        viewResolver.setSuffix("");
+        viewResolver.setPrefix("/WEB-INF/view/");
+        viewResolver.setSuffix(".jsp");
 
         return viewResolver;
     }

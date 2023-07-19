@@ -15,4 +15,5 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 public class SpringConfig {
+
 }
