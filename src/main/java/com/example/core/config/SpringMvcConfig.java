@@ -1,4 +1,4 @@
-package com.example.core;
+package com.example.core.config;
 
 
 import org.springframework.context.annotation.Bean;
@@ -11,6 +11,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 @ComponentScan("com.example.controller")
 @ComponentScan("com.example.api")
+@ComponentScan("com.example.core.advice")
 @Configuration
 public class SpringMvcConfig {
 

@@ -11,4 +11,5 @@ public interface IDao<E extends IEntity<ID>, ID extends Number> {
     List<E> selectAll();
     E modify(E e);
     void remove(ID id);
+    boolean isExist(ID id);
 }

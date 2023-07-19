@@ -50,26 +50,12 @@ public class UserApi {
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity readByIdByPath(@PathVariable Integer id) {
         final UserDto read = userService.read(id);
-
-        if (read == null) {
-            return ResponseEntity.notFound().build();
-        }
-
         return ResponseEntity.ok(read);
     }
 
     @PutMapping("/")
     public ResponseEntity update(@RequestBody UserDto dto) {
-        if (dto.getId() == null) {
-            return ResponseEntity.badRequest().build();
-        }
-
         final UserDto read = userService.read(dto.getId());
-
-        if (read == null) {
-            return ResponseEntity.notFound().build();
-        }
-
         userService.update(dto);
 
         return ResponseEntity.accepted().build();
@@ -77,10 +63,6 @@ public class UserApi {
 
     @DeleteMapping("/{id}")
     public ResponseEntity remove(@PathVariable Integer id) {
-        if (id == null) {
-            return ResponseEntity.badRequest().build();
-        }
-
         userService.delete(id);
 
         return ResponseEntity.accepted().build();

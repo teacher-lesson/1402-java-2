@@ -1,10 +1,12 @@
 package com.example.dto;
 
-import com.example.domain.IEntity;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;
 
-public interface IDto<ID extends Number> extends Serializable {
-    ID getId();
-    IEntity<ID> toEntity();
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
+
+
+@JsonInclude(NON_NULL)
+public interface IDto extends Serializable {
 }

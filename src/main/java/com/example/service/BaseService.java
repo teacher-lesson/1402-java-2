@@ -1,16 +1,24 @@
 package com.example.service;
 
+import com.example.core.exception.ResponseException;
 import com.example.dao.IDao;
 import com.example.domain.IEntity;
-import com.example.dto.IDto;
+import com.example.dto.IDomainDto;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class BaseService<D extends IDto<ID>, E extends IEntity<ID>, ID extends Number> implements IService<D, ID> {
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+
+public abstract class BaseService<D extends IDomainDto<ID>, E extends IEntity<ID>, ID extends Number> implements IService<D, ID> {
     protected abstract IDao<E, ID> getDao();
 
-    protected abstract IDto<ID> createDto(E e);
+    protected abstract IDomainDto<ID> createDto(E e);
+
+    public boolean isExist(ID id) {
+        return getDao().isExist(id);
+    }
 
     @Override
     public void create(D d) {
@@ -19,6 +27,15 @@ public abstract class BaseService<D extends IDto<ID>, E extends IEntity<ID>, ID 
 
     @Override
     public D read(ID id) {
+        if (id == null) {
+            throw new ResponseException("Id not found", BAD_REQUEST);
+        }
+
+        if (!isExist(id)) {
+            throw new ResponseException("Entity not found", NOT_FOUND);
+//            throw new ResponseException(NOT_FOUND);
+        }
+
         return (D) createDto(getDao().select(id));
     }
 
@@ -30,11 +47,27 @@ public abstract class BaseService<D extends IDto<ID>, E extends IEntity<ID>, ID 
 
     @Override
     public D update(D e) {
+        if (e == null || e.getId() == null) {
+            throw new ResponseException(400);
+        }
+
+        if (!isExist(e.getId())) {
+            throw new ResponseException(404);
+        }
+
         return (D) createDto(getDao().modify((E) e.toEntity()));
     }
 
     @Override
     public void delete(ID id) {
+        if (id == null) {
+            throw new ResponseException(400);
+        }
+
+        if (!isExist(id)) {
+            throw new ResponseException(404);
+        }
+
         getDao().remove(id);
     }
 }

@@ -2,7 +2,6 @@ package com.example.dao;
 
 import com.example.domain.IEntity;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -48,5 +47,14 @@ public abstract class BaseDao<E extends IEntity<ID>, ID extends Number> implemen
         var query = session.createQuery("delete from " + getEntityClass().getSimpleName() + " e where e.id =:id");
         query.setParameter("id", id);
         query.executeUpdate();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean isExist(ID id) {
+        var session = getSessionFactory().getCurrentSession();
+
+        return ((Long) session.createQuery("select count(*) from " + getEntityClass().getSimpleName() + " e where e.id =:id")
+                .setParameter("id", id).getSingleResult()) > 0;
     }
 }

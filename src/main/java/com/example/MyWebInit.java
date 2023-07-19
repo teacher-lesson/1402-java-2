@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.core.SpringConfig;
+import com.example.core.config.SpringConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class MyWebInit extends AbstractAnnotationConfigDispatcherServletInitializer {
