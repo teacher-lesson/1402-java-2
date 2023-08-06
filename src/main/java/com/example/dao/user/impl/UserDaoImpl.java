@@ -3,8 +3,9 @@ package com.example.dao.user.impl;
 import com.example.dao.BaseDao;
 import com.example.dao.user.UserDao;
 import com.example.domain.user.User;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,16 +14,12 @@ import java.util.List;
 @Repository
 public class UserDaoImpl extends BaseDao<User, Integer> implements UserDao {
 
-    private final SessionFactory sessionFactory;
-
-    @Autowired
-    public UserDaoImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
-    protected SessionFactory getSessionFactory() {
-        return sessionFactory;
+    protected EntityManager getEntityManager() {
+        return this.entityManager;
     }
 
     @Override
@@ -33,15 +30,13 @@ public class UserDaoImpl extends BaseDao<User, Integer> implements UserDao {
     @Override
     @Transactional(readOnly = true)
     public List<User> selectAllWithProp() {
-        var session = sessionFactory.getCurrentSession();
-        return session.createQuery("from User u left join fetch u.books left join fetch u.roles").getResultList();
+        return entityManager.createQuery("from User u left join fetch u.books left join fetch u.roles").getResultList(); // JQL
     }
 
     @Override
     @Transactional(readOnly = true)
     public User selectWithProp(Integer id) {
-        var session = sessionFactory.getCurrentSession();
-        return (User) session.createQuery("from User u left join fetch u.books left join fetch u.roles where u.id = :id")
+        return (User) entityManager.createQuery("from User u left join fetch u.books left join fetch u.roles where u.id = :id")
                 .setParameter("id", id).getSingleResult();
     }
 }

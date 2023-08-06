@@ -1,6 +1,7 @@
 package com.example.dao;
 
 import com.example.domain.IEntity;
+import jakarta.persistence.EntityManager;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -8,43 +9,38 @@ import java.util.List;
 
 public abstract class BaseDao<E extends IEntity<ID>, ID extends Number> implements IDao<E, ID> {
 
-    protected abstract SessionFactory getSessionFactory();
+    protected abstract EntityManager getEntityManager();
 
     protected abstract Class<E> getEntityClass();
 
     @Override
     @Transactional
     public void insert(E e) {
-        var session = getSessionFactory().getCurrentSession();
-        session.persist(e);
+        getEntityManager().persist(e);
     }
 
     @Override
     @Transactional(readOnly = true)
     public E select(ID id) {
-        var session = getSessionFactory().getCurrentSession();
-        return session.get(getEntityClass(), id);
+        return getEntityManager().find(getEntityClass(), id);
     }
 
     @Override
     @Transactional
     public List<E> selectAll() {
-        var session = getSessionFactory().getCurrentSession();
-        return session.createQuery("from " + getEntityClass().getSimpleName()).getResultList();
+        return getEntityManager().createQuery("From " + getEntityClass().getSimpleName()).getResultList();
     }
 
     @Override
     @Transactional
     public E modify(E e) {
-        var session = getSessionFactory().getCurrentSession();
-        return session.merge(e);
+        return getEntityManager().merge(e);
     }
 
     @Override
     @Transactional
     public void remove(ID id) {
-        var session = getSessionFactory().getCurrentSession();
-        var query = session.createQuery("delete from " + getEntityClass().getSimpleName() + " e where e.id =:id");
+        var query = getEntityManager().createQuery("delete from " + getEntityClass().getSimpleName() + " e where e.id =:id");
         query.setParameter("id", id);
         query.executeUpdate();
     }
@@ -52,9 +48,7 @@ public abstract class BaseDao<E extends IEntity<ID>, ID extends Number> implemen
     @Override
     @Transactional(readOnly = true)
     public boolean isExist(ID id) {
-        var session = getSessionFactory().getCurrentSession();
-
-        return ((Long) session.createQuery("select count(*) from " + getEntityClass().getSimpleName() + " e where e.id =:id")
+        return ((Long) getEntityManager().createQuery("select count(*) from " + getEntityClass().getSimpleName() + " e where e.id =:id")
                 .setParameter("id", id).getSingleResult()) > 0;
     }
 }

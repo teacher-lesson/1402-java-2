@@ -16,9 +16,8 @@ public class UserFullDto implements IDomainDto<Integer> {
     private String password;
     private String firstName;
     private String lastName;
+    private String fullName;
     private int age;
     private Collection<BookDto> books;
     private Collection<RoleDto> roles;
-
-
 }
